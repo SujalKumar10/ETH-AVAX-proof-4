@@ -102,7 +102,7 @@ The contract is deployed on the Avalanche Fuji Testnet. Compatible wallet and te
 1. Ensure you have Node.js and npm installed.
 2. Clone this repository in navigate inside the folder:
    ```bash
-   git clone https://github.com/AyushKr2003/AyushKr2003-ETH-AVAX-Building-on-Avalanche.git
+   git clone https://github.com/SujalKumar10/ETH-AVAX-proof-4
    cd ETH-AVAX-Building-on-Avalanche
 3. Install the necessary dependencies:
    ```bash
@@ -117,4 +117,8 @@ The contract is deployed on the Avalanche Fuji Testnet. Compatible wallet and te
 6. Run the deployment script:
    ```bash
    npx hardhat run scri
+
+## License
+
+This project is licenced under the MIT License.
 
