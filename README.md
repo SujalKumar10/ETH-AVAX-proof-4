@@ -25,18 +25,22 @@ DegenToken is an ERC20 token deployed on the Avalanche network. It is used withi
  2. RedeemTokens: Allows users to redeem tokens for specific items.
     ```solidity
      function RedeemToken(uint choice, uint units) public {
-    require(choice <= 3 && choice > 0, "This item is not in the list");
-    if (choice == 1) {
-        require(units * 10 <= balanceOf(msg.sender), "Insufficient Tokens");
-        _burn(msg.sender, units * 10);
-    } else if (choice == 2) {
-        require(units * 50 <= balanceOf(msg.sender), "Insufficient Tokens");
-        _burn(msg.sender, units * 50);
-    } else if (choice == 3) {
-        require(units * 100 <= balanceOf(msg.sender), "Insufficient Tokens");
-        _burn(msg.sender, units * 100);
-        chestLeft[msg.sender] += units; 
-    }
+        require(choice<=3 && choice>0, "This item is not in the list");
+        if(choice==1){
+            require(units*10 <= balanceOf(msg.sender),"Insufficient Tokens" );
+            _burn(msg.sender, units*10);
+            nftCount[msg.sender] += units; 
+        }
+        else if(choice==2){
+            require(units*50 <= balanceOf(msg.sender),"Insufficient Tokens" );
+            _burn(msg.sender, units*50);
+            TshirtCount[msg.sender] += units; 
+        }
+        else if(choice==3){
+            require(units*100 <= balanceOf(msg.sender),"Insufficient Tokens" );
+            _burn(msg.sender, units*100);
+            chestLeft[msg.sender] += units; 
+        }
     }
 
  3. burn: Allows users to burn their tokens.
@@ -80,6 +84,13 @@ DegenToken is an ERC20 token deployed on the Avalanche network. It is used withi
 1. chestLeft: Count all the treasure chest available in the account.
     ```solidity
      mapping(address => uint) private chestLeft;
+2. nftCount: Count all the NFT available in the account.
+   ```solidity
+     mapping(address => uint) private nftCount;
+
+3. TshirtCount: Count all the T-shirt available in the account.
+   ```solidity
+     mapping(address => uint) private TshirtCount;
 
 
 
