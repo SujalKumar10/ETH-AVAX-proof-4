@@ -9,7 +9,9 @@ contract DegenToken is ERC20, Ownable {
 
     constructor() ERC20("Degen", "DGN"){}
 
-    mapping(address => uint) private chestLeft;
+    mapping(address => uint) public chestLeft;
+    mapping(address => uint) public nftCount;
+    mapping(address => uint) public TshirtCount;
 
     function mint(address to, uint256 amount) public onlyOwner {
         _mint(to, amount);
@@ -24,10 +26,12 @@ contract DegenToken is ERC20, Ownable {
         if(choice==1){
             require(units*10 <= balanceOf(msg.sender),"Insufficient Tokens" );
             _burn(msg.sender, units*10);
+            nftCount[msg.sender] += units; 
         }
         else if(choice==2){
             require(units*50 <= balanceOf(msg.sender),"Insufficient Tokens" );
             _burn(msg.sender, units*50);
+            TshirtCount[msg.sender] += units; 
         }
         else if(choice==3){
             require(units*100 <= balanceOf(msg.sender),"Insufficient Tokens" );
@@ -54,14 +58,10 @@ contract DegenToken is ERC20, Ownable {
         return this.balanceOf(msg.sender);
     }
 
-    function chestsRemains() external view returns(uint){
-        return chestLeft[msg.sender];
-
-    }
 
     function openTreasurechest() public returns(string memory){
         require(chestLeft[msg.sender] > 0, "you don't have any chest");
         chestLeft[msg.sender]--;
-        return "you got a item";      
+        return "you got an item";      
     }
 }
